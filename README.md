@@ -1,54 +1,124 @@
-# React + TypeScript + Vite
+# Instagram Stories Clone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern Instagram Stories clone built with React, TypeScript, and Tailwind CSS. This project implements the core functionality of Instagram Stories with a focus on performance, user experience, and code quality.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 📱 Responsive design that works on both desktop and mobile
+- 🎨 Modern UI with smooth animations and transitions
+- ⚡ Optimized performance with React hooks and TypeScript
+- 🔄 Story progress tracking with visual indicators
+- 👆 Touch and mouse interactions for navigation
+- ⏸️ Pause story playback on hold
+- 🖼️ High-quality image loading with blur effects
+- 🔍 Image preloading for smooth transitions
+- ⌨️ Keyboard navigation support
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- React 18
+- TypeScript
+- Tailwind CSS
+- Vite
+- ESLint
+- Prettier
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Getting Started
+
+### Prerequisites
+
+- Node.js 16.x or higher
+- npm
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/instagram-stories-clone.git
+cd instagram-stories-clone
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+2. Install dependencies:
+```bash
+npm install
 ```
+
+3. Start the development server:
+```bash
+npm run dev
+```
+
+4. Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+## Project Structure
+
+```
+src/
+├── components/         # React components
+│   ├── StoryList.tsx  # Story list with user avatars
+│   ├── StoryProgress.tsx  # Progress bars for stories
+│   └── StoryViewer.tsx  # Full-screen story viewer
+├── hooks/             # Custom React hooks
+│   ├── useStoryProgress.ts  # Story progress management
+│   └── useStoryNavigation.ts  # Story navigation logic
+├── constants/         # Application constants
+│   └── story.ts      # Story-related constants
+├── data/             # Mock data
+│   └── stories.ts    # Story data structure
+└── App.tsx           # Main application component
+```
+
+## Features in Detail
+
+### Story Navigation
+- Click/tap left side to go to previous story
+- Click/tap right side to go to next story
+- Hold middle section to pause the story
+- Progress bars show current story position
+- Smooth transitions between stories
+
+### Image Loading
+- Blur effect while images are loading
+- Loading spinner for visual feedback
+- Preloading of next story for smooth transitions
+- Error handling for failed image loads
+
+### User Interface
+- Clean, modern design with Tailwind CSS
+- Responsive layout for all screen sizes
+- User avatar and username display
+- Close button to exit story view
+- Progress indicators for story duration
+
+## Development
+
+### Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run lint` - Run ESLint
+- `npm run format` - Format code with Prettier
+
+### Code Style
+
+This project uses ESLint and Prettier for code formatting. The configuration can be found in:
+- `.eslintrc.cjs`
+- `.prettierrc`
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Images provided by [Unsplash](https://unsplash.com)
+- Inspired by Instagram's story feature
+- Built with modern web technologies
