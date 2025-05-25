@@ -1,24 +1,19 @@
-import { useCallback } from 'react';
 import { StoryList } from './components/StoryList';
 import { StoryViewer } from './components/StoryViewer';
 import { userStories } from './data/stories';
 import { useStoryNavigation } from './hooks/useStoryNavigation';
-import { MAX_WIDTH, MOBILE_BREAKPOINT } from './constants/story';
+import { MAX_WIDTH } from './constants/story';
 
 function App() {
-  const handleClose = useCallback(() => {
-    // Additional cleanup logic can be added here
-  }, []);
-
   const {
     selectedUser,
     handleStoryClick,
-    handleClose: closeStory,
+    handleClose,
     handleNextUser,
     handlePreviousUser
   } = useStoryNavigation({
     userStories,
-    onClose: handleClose
+    onClose: () => {} // Empty callback since we don't need additional cleanup
   });
 
   return (
@@ -31,7 +26,7 @@ function App() {
       {selectedUser && (
         <StoryViewer
           userStory={selectedUser}
-          onClose={closeStory}
+          onClose={handleClose}
           onNextUser={handleNextUser}
           onPreviousUser={handlePreviousUser}
         />
