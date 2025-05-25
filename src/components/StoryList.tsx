@@ -1,5 +1,4 @@
 import type { UserStory } from '../data/stories';
-import styles from './StoryList.module.css';
 
 interface StoryListProps {
   userStories: UserStory[];
@@ -8,21 +7,23 @@ interface StoryListProps {
 
 export const StoryList = ({ userStories, onStoryClick }: StoryListProps) => {
   return (
-    <div className={styles.storyList}>
+    <div className="flex overflow-x-auto gap-4 p-4 scrollbar-hide">
       {userStories.map((userStory) => (
         <div
           key={userStory.id}
-          className={styles.storyItem}
+          className="flex flex-col items-center cursor-pointer min-w-[70px]"
           onClick={() => onStoryClick(userStory.id)}
         >
-          <div className={styles.storyRing}>
+          <div className="w-[60px] h-[60px] rounded-full p-[2px] bg-gradient-to-r from-[#f09433] via-[#e6683c] to-[#dc2743]">
             <img
               src={userStory.avatar}
               alt={`${userStory.username}'s story`}
-              className={styles.storyImage}
+              className="w-full h-full rounded-full border-2 border-white object-cover"
             />
           </div>
-          <span className={styles.username}>{userStory.username}</span>
+          <span className="text-xs mt-1 text-gray-800 max-w-[70px] truncate text-center">
+            {userStory.username}
+          </span>
         </div>
       ))}
     </div>

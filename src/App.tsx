@@ -1,51 +1,28 @@
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
 import { StoryList } from './components/StoryList';
 import { StoryViewer } from './components/StoryViewer';
 import { userStories } from './data/stories';
-import styles from './App.module.css';
+import { useStoryNavigation } from './hooks/useStoryNavigation';
+import { MAX_WIDTH, MOBILE_BREAKPOINT } from './constants/story';
 
 function App() {
-  const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
-
-  const handleStoryClick = useCallback((userId: number) => {
-    setSelectedUserId(userId);
-  }, []);
-
   const handleClose = useCallback(() => {
-    setSelectedUserId(null);
+    // Additional cleanup logic can be added here
   }, []);
 
-  const handleNextUser = useCallback(() => {
-    if (selectedUserId === null) {
-      console.log("No user selected");
-      return;
-    }
-    const currentIndex = userStories.findIndex(user => user.id === selectedUserId);
-    if (currentIndex < userStories.length - 1) {
-      console.log("Next user");
-      setSelectedUserId(userStories[currentIndex + 1].id);
-    } else {
-      console.log("No more users");
-      handleClose();
-    }
-  }, [selectedUserId, handleClose]);
-
-  const handlePreviousUser = useCallback(() => {
-    if (selectedUserId === null) return;
-    const currentIndex = userStories.findIndex(user => user.id === selectedUserId);
-    if (currentIndex > 0) {
-      setSelectedUserId(userStories[currentIndex - 1].id);
-    } else {
-      setSelectedUserId(userStories[0].id);
-    }
-  }, [selectedUserId]);
-
-  const selectedUser = selectedUserId
-    ? userStories.find(user => user.id === selectedUserId)
-    : null;
+  const {
+    selectedUser,
+    handleStoryClick,
+    handleClose: closeStory,
+    handleNextUser,
+    handlePreviousUser
+  } = useStoryNavigation({
+    userStories,
+    onClose: handleClose
+  });
 
   return (
-    <div className={styles.app}>
+    <div className={`max-w-full mx-auto p-4 bg-gray-50 min-h-screen md:max-w-[${MAX_WIDTH}px]`}>
       <StoryList
         userStories={userStories}
         onStoryClick={handleStoryClick}
@@ -54,7 +31,7 @@ function App() {
       {selectedUser && (
         <StoryViewer
           userStory={selectedUser}
-          onClose={handleClose}
+          onClose={closeStory}
           onNextUser={handleNextUser}
           onPreviousUser={handlePreviousUser}
         />

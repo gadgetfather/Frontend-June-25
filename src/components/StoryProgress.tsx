@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import styles from './StoryProgress.module.css';
 
 interface StoryProgressProps {
   totalStories: number;
@@ -36,11 +35,11 @@ export const StoryProgress = ({
   }, [currentStoryIndex, duration, onComplete]);
 
   return (
-    <div className={styles.progressContainer}>
+    <div className="flex gap-1 p-2 absolute top-0 left-0 right-0 z-10">
       {Array.from({ length: totalStories }).map((_, index) => (
-        <div key={index} className={styles.progressBarContainer}>
+        <div key={index} className="flex-1 h-0.5 bg-white/30 rounded-full overflow-hidden">
           <div
-            className={styles.progressBar}
+            className="h-full bg-white transition-[width] duration-100 ease-linear"
             style={{
               width: `${index === currentStoryIndex ? progress : index < currentStoryIndex ? 100 : 0}%`
             }}

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { UserStory } from '../data/stories';
 import { StoryProgress } from './StoryProgress';
-import styles from './StoryViewer.module.css';
 
 interface StoryViewerProps {
   userStory: UserStory;
@@ -51,7 +50,6 @@ export const StoryViewer = ({
     }
   };
 
-  // Reset currentStoryIndex when userStory changes
   useEffect(() => {
     console.log("Resetting to first story for user:", userStory.username);
     setCurrentStoryIndex(0);
@@ -59,7 +57,6 @@ export const StoryViewer = ({
   }, [userStory.id]);
 
   useEffect(() => {
-    // Validate story index and user stories
     if (!userStory?.stories?.length) {
       console.log("No stories available");
       onClose();
@@ -102,35 +99,41 @@ export const StoryViewer = ({
   }
 
   return (
-    <div className={styles.container}>
+    <div className="fixed inset-0 bg-black z-50 flex flex-col">
       <StoryProgress
         totalStories={userStory.stories.length}
         currentStoryIndex={currentStoryIndex}
         onComplete={handleNext}
       />
       
-      <div className={styles.header}>
-        <div className={styles.userInfo}>
+      <div className="flex justify-between items-center p-3 text-white z-20">
+        <div className="flex items-center gap-2">
           <img
             src={userStory.avatar}
             alt={userStory.username}
-            className={styles.avatar}
+            className="w-8 h-8 rounded-full border-2 border-white"
           />
-          <span className={styles.username}>{userStory.username}</span>
+          <span className="font-semibold text-sm">{userStory.username}</span>
         </div>
-        <button className={styles.closeButton} onClick={onClose}>
+        <button 
+          className="text-2xl cursor-pointer p-2 hover:opacity-80"
+          onClick={onClose}
+        >
           ×
         </button>
       </div>
 
-      <div className={styles.storyContent} onClick={handleClick}>
+      <div 
+        className="flex-1 relative flex items-center justify-center cursor-pointer"
+        onClick={handleClick}
+      >
         {isLoading ? (
-          <div className={styles.loading}>Loading...</div>
+          <div className="text-white text-base">Loading...</div>
         ) : (
           <img
             src={currentStory.content}
             alt="Story content"
-            className={styles.storyImage}
+            className="max-w-full max-h-full object-contain"
           />
         )}
       </div>
